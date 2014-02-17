@@ -14,6 +14,10 @@ class Chitter < Sinatra::Base
   	erb :"new_maker"
   end
 
+  post '/makers' do
+    "hello"
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end

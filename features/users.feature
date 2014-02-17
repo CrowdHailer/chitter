@@ -3,13 +3,37 @@ Feature: User Sign up
 
 	Scenario: Enter valid user details
 		When I go to sign up
-		When I fill in the following:
-			| email | pete@pez.com |
-			|name | Peter |
-			| username| Pickleaddict |
-			|password| a123 |
-			|password_confirmation | a123|
+		And I fill in the following:
+			| email 								| pete@pez.com |
+			| name 									| Peter 			 |
+			| username							| Pickleaddict |
+			| password 							| a123 				 |
+			| password_confirmation | a123				 |
 		And I press "Sign up"
-		Then I am added as a chitter user
+		Then I should be added as a chitter user
+
+	Scenario: Password confirmation does not match
+	When I go to sign up
+		And I fill in the following:
+			| email 								| pete@pez.com |
+			| name 									| Peter 			 |
+			| username							| Pickleaddict |
+			| password 							| a123 				 |
+			| password_confirmation | incorrect		 |
+		And I press "Sign up"
+		Then I should not be added as a chitter user
+
+	Scenario: Double sign up
+		Given I am already a maker
+		When I go to sign up
+		And I fill in the following:
+			| email 								| pete@pez.com |
+			| name 									| Peter 			 |
+			| username							| Pickleaddict |
+			| password 							| a123 				 |
+			| password_confirmation | a123				 |
+		And I press "Sign up"
+		Then I should not be added as a chitter user
+
 
 

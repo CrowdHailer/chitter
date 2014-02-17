@@ -1,3 +1,3 @@
-Then(/^I am added as a chitter user$/) do
+Then(/^I should be added as a chitter user$/) do
   expect(Maker.count).to eq(1)
 end
