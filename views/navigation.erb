@@ -1,0 +1,6 @@
+<%  if @current_user && @current_user.username %>
+  <a href="/sessions/end">Log out</a>
+<% else  %>
+  <a href="/makers/new">Sign up</a>
+  <a href="/sessions/new">Log in</a>
+<% end %>

@@ -14,11 +14,13 @@ Feature: User Log in
 
 	Scenario: Correct log in details
 		When I go to log in
+		Then I should see "Log in"
 		And I fill in the following:
 		| username							| Pickleaddict |
 		| password 							| a123 				 |
 		And I press "Log in"
 		Then I should see "Welcome Pickleaddict"
+		And I should see "Log out"
 
 	Scenario: Incorrect password
 		When I go to log in
@@ -35,3 +37,6 @@ Feature: User Log in
 		| password 							| a123 				 |
 		And I press "Log in"
 		Then I should see "Incorrect Username or Password"
+
+
+
