@@ -12,7 +12,9 @@ class Chitter < Sinatra::Base
   use Rack::Flash
 
   get '/' do
-    'Welcome Chitter!'
+    id = session[:maker_id]
+    @current_user = Maker.first(id: id)
+    erb :index
   end
 
   get '/makers/new' do

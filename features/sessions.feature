@@ -18,7 +18,7 @@ Feature: User Log in
 		| username							| Pickleaddict |
 		| password 							| a123 				 |
 		And I press "Log in"
-		Then I should see "Welcome"
+		Then I should see "Welcome Pickleaddict"
 
 	Scenario: Incorrect password
 		When I go to log in
