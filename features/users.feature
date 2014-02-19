@@ -23,8 +23,7 @@ Feature: User Sign up
 		And I press "Sign up"
 		Then I should not be added as a chitter user
 
-	Scenario: Double sign up
-		Given I am already a maker
+	Scenario: Sign up wih taken email
 		When I go to sign up
 		And I fill in the following:
 			| email 								| pete@pez.com |
@@ -33,7 +32,16 @@ Feature: User Sign up
 			| password 							| a123 				 |
 			| password_confirmation | a123				 |
 		And I press "Sign up"
-		Then I should not be added as a chitter user
+		When I go to sign up
+		And I fill in the following:
+			| email 								| pete@pez.com |
+			| name 									| Peter2			 |
+			| username							| banana man	 |
+			| password 							| a123 				 |
+			| password_confirmation | a123				 |
+		And I press "Sign up"
+		Then I should see "This email is already signed up"
+
 
 
 

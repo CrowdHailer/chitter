@@ -5,7 +5,7 @@ class Maker
 
 	property :id, Serial
 	property :name, String
-	property :email, String
+	property :email, String, unique: true, message: "This email is already signed up"
 	property :username, String, unique: true, message: "This username is already taken"
 	property :password_digest, Text
 

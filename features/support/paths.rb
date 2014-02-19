@@ -16,6 +16,9 @@ module NavigationHelpers
     when /sign up/
       '/makers/new'
 
+    when /log in/
+      '/sessions/new'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
