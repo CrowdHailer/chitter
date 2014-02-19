@@ -11,7 +11,7 @@ describe Maker do
 		maker.password= password
 	end
 
-	it 'sets the password digest' do	
+	it 'sets the password digest' do
 		maker.password= password
 		expect(maker.password_digest).not_to be_nil
 	end
@@ -23,9 +23,9 @@ describe Maker do
 	end
 
 	it 'authenticates' do
-		email = 'me@there.com'
+		username = 'me'
 		maker.password= password
-		expect(Maker).to receive(:first).with(email: email).and_return(maker)
-		expect(Maker.authenticate(email,password)).to eq maker
+		expect(Maker).to receive(:first).with(username: username).and_return(maker)
+		expect(Maker.authenticate(username,password)).to eq maker
 	end
 end
