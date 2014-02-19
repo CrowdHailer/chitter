@@ -2,6 +2,7 @@ env = ENV["RACK_ENV"] || "development"
 
 require 'sinatra/base'
 require_relative 'db_config'
+require 'sinatra/partial'
 
 require 'rack-flash'
 
@@ -10,6 +11,9 @@ class Chitter < Sinatra::Base
   enable :sessions
   set :session_secret, 'mixed'
   use Rack::Flash
+  register Sinatra::Partial
+
+  set :partial_template_engine, :erb
 
   get '/' do
     id = session[:maker_id]
