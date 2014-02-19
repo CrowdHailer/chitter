@@ -2,6 +2,7 @@ env = ENV["RACK_ENV"] || "development"
 
 require 'sinatra/base'
 require_relative 'db_config'
+require 'sinatra/partial'
 
 require 'rack-flash'
 
@@ -10,9 +11,14 @@ class Chitter < Sinatra::Base
   enable :sessions
   set :session_secret, 'mixed'
   use Rack::Flash
-	
+  register Sinatra::Partial
+
+  set :partial_template_engine, :erb
+
   get '/' do
-    'Hello Chitter!'
+    id = session[:maker_id]
+    @current_user = Maker.first(id: id)
+    erb :index
   end
 
   get '/makers/new' do
@@ -24,12 +30,12 @@ class Chitter < Sinatra::Base
                        username: params[:username],
                        email: params[:email],
                        password: params[:password],
-                       password_confirmation: 
+                       password_confirmation:
                         params[:password_confirmation])
-    if @maker.save 
+    if @maker.save
     else
       flash.now[:errors] = @maker.errors.full_messages
-      erb :"new_maker"      
+      erb :"new_maker"
     end
   end
 
@@ -38,8 +44,9 @@ class Chitter < Sinatra::Base
   end
 
   post '/sessions' do
-    email, username = params[:email], params[:username]
-    maker = Maker.authenticate(email, username)
+    username, password = params[:username], params[:password]
+    maker = Maker.authenticate(username, password)
+    puts params
     if maker
       session[:maker_id] = maker.id
       redirect '/'

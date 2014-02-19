@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Chitter</title>
-	</head>
-	<body>
-		<h1>Please sign up</h1>
-		<form action="/makers" method="post">
-			Email: <input type="email" name="email" required>
-			Name: <input type="text" name="name" required>
-			UserName: <input type="text" name="username" required>	
-			Password: <input type="password" name="password">
-			Confirm Password: <input type="password" name="password_confirmation">
-			<input type="submit" value="Sign up">
-		</form>
-		<% if flash[:errors] && !flash[:errors].empty? %>
-			Sorry, there were the following problems with the form.
-			<ul id="errors">
-				<% flash[:errors].each do |error| %>
-					<li><%= error %></li>
-				<% end %>
-			</ul>
-		<% end %>
-	</body>
-</html>
+<h1>Please sign up</h1>
+<form action="/makers" method="post">
+	Email: <input type="email" name="email" required>
+	Name: <input type="text" name="name" required>
+	UserName: <input type="text" name="username" required>
+	Password: <input type="password" name="password">
+	Confirm Password: <input type="password" name="password_confirmation">
+	<input type="submit" value="Sign up">
+</form>
+<%= partial :error_message %>
