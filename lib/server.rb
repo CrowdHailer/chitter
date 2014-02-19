@@ -33,6 +33,8 @@ class Chitter < Sinatra::Base
                        password_confirmation:
                         params[:password_confirmation])
     if @maker.save
+      session[:user_id] = @maker.id
+      redirect '/'
     else
       flash.now[:errors] = @maker.errors.full_messages
       erb :"new_maker"
@@ -43,10 +45,14 @@ class Chitter < Sinatra::Base
     erb :"new_session"
   end
 
+  get '/sessions/end' do
+    session[:maker_id] = nil
+    redirect '/'
+  end
+
   post '/sessions' do
     username, password = params[:username], params[:password]
     maker = Maker.authenticate(username, password)
-    puts params
     if maker
       session[:maker_id] = maker.id
       redirect '/'

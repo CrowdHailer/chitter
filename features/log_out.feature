@@ -21,5 +21,5 @@ Feature: User Log out
     And I should see "Log out"
 
   Scenario:
-    When I press "Log out"
+    When I follow "Log out"
     Then I should see "Log in"
